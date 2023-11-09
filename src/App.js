@@ -1,11 +1,25 @@
 import Notes from './components/Notes'
 import NewNote from './components/NewNote'
 
-const App = () => (
-  <>
-    <NewNote />
-    <Notes />
-  </>
-)
+const App = () => {
+  const filterSelected = (value) => {
+    console.log(value)
+  }
+
+  return (
+    <>
+      <NewNote />
+      <div>
+        all          <input type="radio" name="filter"
+          onChange={() => filterSelected('ALL')} />
+        important    <input type="radio" name="filter"
+          onChange={() => filterSelected('IMPORTANT')} />
+        nonimportant <input type="radio" name="filter"
+          onChange={() => filterSelected('NONIMPORTANT')} />
+      </div>
+      <Notes />
+    </>
+  )
+}
 
 export default App
