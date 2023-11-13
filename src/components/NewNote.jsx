@@ -1,14 +1,18 @@
-import { createNote } from '../reducers/noteReducer'
 import { useDispatch } from 'react-redux'
+import { appendNote } from '../reducers/noteReducer'
 
-export default function NewNote() {
+import noteService from '../services/notes'
+
+const NewNote = () => {
   const dispatch = useDispatch()
 
-  const addNote = (event) => {
+  const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
-    dispatch(createNote(content))
+
+    const newNote = await noteService.createNew(content)
+    dispatch(appendNote(newNote))
   }
 
   return (
@@ -18,3 +22,5 @@ export default function NewNote() {
     </form>
   )
 }
+
+export default NewNote
